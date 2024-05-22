@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RandomHeroGenerator.Host.Models;
+using RandomHeroGenerator.Host.Services;
 
 namespace RandomHeroGenerator.Host.Controllers
 {
@@ -112,81 +114,53 @@ namespace RandomHeroGenerator.Host.Controllers
         {
             bool? attackSuccess;
 
-            switch (attacker.Type)
-            {
-                case "Archer":
-                    attackSuccess = defender.Type switch
-                    {
-                        "Horseman" => Random.NextDouble() < 0.4,
-                        "Swordsman" => true,
-                        "Archer" => true,
-                        _ => throw new ArgumentOutOfRangeException()
-                    };
-                    break;
-                case "Swordsman":
-                    attackSuccess = defender.Type switch
-                    {
-                        "Horseman" => null,
-                        "Swordsman" => true,
-                        "Archer" => false,
-                        _ => throw new ArgumentOutOfRangeException()
-                    };
-                    break;
-                case "Horseman":
-                    attackSuccess = defender.Type switch
-                    {
-                        "Horseman" => true,
-                        "Swordsman" => true,
-                        "Archer" => false,
-                        _ => throw new ArgumentOutOfRangeException()
-                    };
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            HeroHelper.GetTheWinner(attacker, defender);
 
-            if (attackSuccess == true)
-            {
-                //defender.Health = Math.Max(defender.Health / 2, defender.InitialHealth / 4);
-                //if (defender.Health <= defender.InitialHealth / 4) defender.Health = 0;
-                defender.Health = 0;
-            }
-            else if (attackSuccess == false)
-            {
-                //attacker.Health = Math.Max(attacker.Health / 2, attacker.InitialHealth / 4);
-                //if (attacker.Health <= attacker.InitialHealth / 4) attacker.Health = 0;
-                attacker.Health = 0;
-            }
+            //switch (attacker.Type)
+            //{
+            //    case "Archer":
+            //        attackSuccess = defender.Type switch
+            //        {
+            //            "Horseman" => Random.NextDouble() < 0.4,
+            //            "Swordsman" => true,
+            //            "Archer" => true,
+            //            _ => throw new ArgumentOutOfRangeException()
+            //        };
+            //        break;
+            //    case "Swordsman":
+            //        attackSuccess = defender.Type switch
+            //        {
+            //            "Horseman" => null,
+            //            "Swordsman" => true,
+            //            "Archer" => false,
+            //            _ => throw new ArgumentOutOfRangeException()
+            //        };
+            //        break;
+            //    case "Horseman":
+            //        attackSuccess = defender.Type switch
+            //        {
+            //            "Horseman" => true,
+            //            "Swordsman" => true,
+            //            "Archer" => false,
+            //            _ => throw new ArgumentOutOfRangeException()
+            //        };
+            //        break;
+            //    default:
+            //        throw new ArgumentOutOfRangeException();
+            //}
+
+            //if (attackSuccess == true)
+            //{
+            //    //defender.Health = Math.Max(defender.Health / 2, defender.InitialHealth / 4);
+            //    //if (defender.Health <= defender.InitialHealth / 4) defender.Health = 0;
+            //    defender.Health = 0;
+            //}
+            //else if (attackSuccess == false)
+            //{
+            //    //attacker.Health = Math.Max(attacker.Health / 2, attacker.InitialHealth / 4);
+            //    //if (attacker.Health <= attacker.InitialHealth / 4) attacker.Health = 0;
+            //    attacker.Health = 0;
+            //}
         }
-    }
-
-    public class Hero
-    {
-        public int Id { get; set; }
-        public string Type { get; set; }
-        public int Health { get; set; }
-        public int InitialHealth { get; set; }
-    }
-
-    public class Arena
-    {
-        public List<Hero> Heroes { get; set; }
-        public List<BattleRound> History { get; set; }
-    }
-
-    public class BattleRound
-    {
-        public string? AttackerType { get; set; }
-        public string? DefenderType { get; set; }
-        public int Attacker { get; set; }
-        public int Defender { get; set; }
-        public int AttackerHealthChange { get; set; }
-        public int DefenderHealthChange { get; set; }
-    }
-
-    public class ArenaResult
-    {
-        public List<BattleRound> History { get; set; }
-        public int? LastHeroStanding { get; set; }
     }
 }
