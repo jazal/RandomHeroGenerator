@@ -48,21 +48,15 @@ namespace RandomHeroGenerator.Host.Helpers
             attacker.Health = attacker.Health / 2;
             defender.Health = defender.Health / 2;
 
-            if (defender.Health <= defender.InitialHealth / 4) defender.Health = 0;
             if (attacker.Health <= attacker.InitialHealth / 4) attacker.Health = 0;
+            if (defender.Health <= defender.InitialHealth / 4) defender.Health = 0;
 
             if (attackSuccess == true)
             {
-                // var dQuarterHealth = defender.InitialHealth / 4;
-                // defender.Health = Math.Max(defender.Health / 2, dQuarterHealth);
-                // if (defender.Health <= dQuarterHealth) defender.Health = 0;
                 defender.Health = 0;
             }
             else if (attackSuccess == false)
             {
-                // var aQuarterHealth = attacker.InitialHealth / 4;
-                // attacker.Health = Math.Max(attacker.Health / 2, aQuarterHealth);
-                // if (attacker.Health <= aQuarterHealth) attacker.Health = 0;
                 attacker.Health = 0;
             }
         }
