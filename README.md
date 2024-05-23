@@ -39,12 +39,27 @@ This project is a web API that simulates battles between heroes in an arena. The
 - **Output**: Arena identifier
 
 #### Example Request
-```http
-POST /api/heroes/generate?numberOfFighters=5
+- POST /api/heroes/generate?numberOfFighters=5
 
 ### Battle
 - **Endpoint**: `/api/heroes/battle`
 - **Method**: POST
 - **Input**: `arenaId` (query parameter)
 - **Output**: History describing the number of rounds, who attacked whom in each round, and how their health changed.
+
+#### Example Request
+- POST /api/heroes/battle?arenaId={Arena identifier}
+
+### Focus on Requirements and Unit Testing
+This project is laser-focused on meeting the specific requirements outlined for the battle simulation and ensuring robust unit testing. The core functionality and battle logic are designed to adhere strictly to these rules, providing a solid foundation for future enhancements.
+
+### Temporary Data Storage
+Currently, all data is stored in temporary in-memory structures to facilitate quick development and testing. This approach allows for immediate feedback and iteration on the core logic without the overhead of database management.
+
+### Future Enhancements
+While the current implementation focuses on the core battle logic and unit testing, future enhancements will include:
+- Implementing interfaces to abstract data storage.
+- Connecting to a database for persistent data storage.
+- Enhancing performance and scalability.
+- These improvements will ensure the simulator is robust, scalable, and ready for production use.
 
