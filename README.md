@@ -41,3 +41,10 @@ This project is a web API that simulates battles between heroes in an arena. The
 #### Example Request
 ```http
 POST /api/heroes/generate?numberOfFighters=5
+
+Battle
+Endpoint: /api/heroes/battle
+Method: POST
+Input: arenaId (query parameter)
+Output: History describing the number of rounds, who attacked whom in each round, and how their health changed.
+
