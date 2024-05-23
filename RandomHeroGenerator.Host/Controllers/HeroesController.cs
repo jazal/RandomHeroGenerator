@@ -52,7 +52,7 @@ namespace RandomHeroGenerator.Host.Controllers
             while (arena.Heroes.Count > 1)
             {
                 var round = new BattleRound();
-                var (attacker, defender) = Fighters.SelectRandomFighters(arena.Heroes);
+                var (attacker, defender) = HeroHelper.SelectRandomFighters(arena.Heroes);
                 round.Attacker = attacker.Id;
                 round.Defender = defender.Id;
 

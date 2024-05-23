@@ -4,7 +4,7 @@ using RandomHeroGenerator.Host.Helpers;
 namespace RandomHeroGenerator.UnitTest
 {
     [TestClass]
-    public class HeroHelperTests
+    public class SimulateAttackTests
     {
         [TestMethod]
         public void SimulateAttack_ArcherVsHorseman_HorsemanDies()

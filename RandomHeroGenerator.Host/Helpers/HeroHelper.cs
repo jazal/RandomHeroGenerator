@@ -47,7 +47,7 @@ namespace RandomHeroGenerator.Host.Helpers
             // If it becomes less than a quarter of the initial health, they die.
             attacker.Health = attacker.Health / 2;
             defender.Health = defender.Health / 2;
-            
+
             if (defender.Health <= defender.InitialHealth / 4) defender.Health = 0;
             if (attacker.Health <= attacker.InitialHealth / 4) attacker.Health = 0;
 
@@ -65,6 +65,23 @@ namespace RandomHeroGenerator.Host.Helpers
                 // if (attacker.Health <= aQuarterHealth) attacker.Health = 0;
                 attacker.Health = 0;
             }
+        }
+
+        public static (Hero, Hero) SelectRandomFighters(List<Hero> heroes)
+        {
+            if (heroes.Count == 1) throw new Exception("There should be atleast 2 or more fighters.");
+
+            Random Random = new();
+
+            var attacker = heroes[Random.Next(heroes.Count)];
+            Hero defender;
+
+            do
+            {
+                defender = heroes[Random.Next(heroes.Count)];
+            } while (defender.Id == attacker.Id);   // Same hero cannot battle together
+
+            return (attacker, defender);
         }
     }
 }

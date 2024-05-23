@@ -4,7 +4,7 @@ using RandomHeroGenerator.Host.Helpers;
 namespace RandomHeroGenerator.UnitTest
 {
     [TestClass]
-    public class FightersTests
+    public class SelectRandomFightersTests
     {
         [TestMethod]
         public void SelectRandomFighters_ReturnsTwoDifferentHeroes()
@@ -18,7 +18,7 @@ namespace RandomHeroGenerator.UnitTest
             };
 
             // Act
-            var result = Fighters.SelectRandomFighters(heroes);
+            var result = HeroHelper.SelectRandomFighters(heroes);
 
             // Assert
             Assert.IsNotNull(result);
@@ -36,7 +36,7 @@ namespace RandomHeroGenerator.UnitTest
             };
 
             // Act
-            var result = Fighters.SelectRandomFighters(heroes);
+            var result = HeroHelper.SelectRandomFighters(heroes);
 
             // Assert
             Assert.IsNotNull(result);
@@ -54,7 +54,7 @@ namespace RandomHeroGenerator.UnitTest
             };
 
             // Act
-            Fighters.SelectRandomFighters(heroes);
+            HeroHelper.SelectRandomFighters(heroes);
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace RandomHeroGenerator.UnitTest
             };
 
             // Act
-            var result = Fighters.SelectRandomFighters(heroes);
+            var result = HeroHelper.SelectRandomFighters(heroes);
 
             // Assert
             Assert.IsTrue(heroes.Contains(result.Item1), "The attacker should be one of the heroes from the list.");
