@@ -50,13 +50,6 @@ namespace RandomHeroGenerator.UnitTest
             Assert.AreEqual(0, archerDefend.Health);
         }
 
-
-
-
-
-
-
-
         [TestMethod]
         public void GetTheWinner_SwordsmanVsHorseman_NoEffect()
         {
