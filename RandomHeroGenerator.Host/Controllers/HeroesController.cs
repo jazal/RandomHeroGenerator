@@ -12,6 +12,7 @@ namespace RandomHeroGenerator.Host.Controllers
         private static int _arenaCounter = 0;
         private static int _heroCounter = 0;
         private static readonly Random Random = new();
+        private static List<ArenaResult> ArenaResults = new();
 
         [HttpPost("generate")]
         public ActionResult<int> GenerateHeroes([FromQuery] int numberOfFighters)
@@ -41,8 +42,12 @@ namespace RandomHeroGenerator.Host.Controllers
                 return NotFound("Arena not found!");
             }
 
+            var result = ArenaResults.FirstOrDefault(ar => ar.ArenaId == arenaId);
+            if (result is not null) return Ok(result);
+
             var arena = Arenas[arenaId];
             var history = new List<BattleRound>();
+            var eliminatedHeroes = new List<Hero>();
 
             while (arena.Heroes.Count > 1)
             {
@@ -60,8 +65,11 @@ namespace RandomHeroGenerator.Host.Controllers
                 round.AttackerHealthChange = initialHealth.Item1 - attacker.Health;
                 round.DefenderHealthChange = initialHealth.Item2 - defender.Health;
 
-                if (defender.Health <= 0) arena.Heroes.Remove(defender);
+                AddOrReplaceHeroes(eliminatedHeroes, attacker);
+                AddOrReplaceHeroes(eliminatedHeroes, defender);
+
                 if (attacker.Health <= 0) arena.Heroes.Remove(attacker);
+                if (defender.Health <= 0) arena.Heroes.Remove(defender);
 
                 // Increase health of heroes by 10 who are not involved in the current round
                 foreach (var hero in arena.Heroes)
@@ -75,14 +83,22 @@ namespace RandomHeroGenerator.Host.Controllers
                 history.Add(round);
             }
 
+            if(arena.Heroes.Count == 1) AddOrReplaceHeroes(eliminatedHeroes, arena.Heroes[0]);
+
             arena.History = history; // Update arena history
             Arenas[arenaId] = arena; // Save the updated arena back to the dictionary
 
-            return Ok(new ArenaResult
+            var _arenaResult = new ArenaResult
             {
+                ArenaId = arenaId,
+                Heroes = eliminatedHeroes,
                 History = history,
                 LastHeroStanding = arena.Heroes.Count == 1 ? arena.Heroes[0].Id : (int?)null
-            });
+            };
+
+            ArenaResults.Add(_arenaResult);
+
+            return Ok(_arenaResult);
         }
 
         private static Hero GenerateRandomHero()
@@ -97,6 +113,20 @@ namespace RandomHeroGenerator.Host.Controllers
                 "Swordsman" => new Hero { Id = id, Type = type, Health = 120, InitialHealth = 120 },
                 _ => throw new ArgumentOutOfRangeException()
             };
+        }
+
+        private static void AddOrReplaceHeroes(List<Hero> list, Hero newObject)
+        {
+            var existingObject = list.FirstOrDefault(o => o.Id == newObject.Id);
+            if (existingObject != null)
+            {
+                existingObject.Health = newObject.Health; // Update properties as needed
+                existingObject.InitialHealth = newObject.InitialHealth; // Update properties as needed
+            }
+            else
+            {
+                list.Add(newObject);
+            }
         }
     }
 }
