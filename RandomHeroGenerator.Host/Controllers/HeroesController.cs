@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RandomHeroGenerator.Host.Models;
-using RandomHeroGenerator.Host.Services;
+using RandomHeroGenerator.Host.Helpers;
 
 namespace RandomHeroGenerator.Host.Controllers
 {
@@ -118,7 +118,7 @@ namespace RandomHeroGenerator.Host.Controllers
         private static void AddOrReplaceHeroes(List<Hero> list, Hero newObject)
         {
             var existingObject = list.FirstOrDefault(o => o.Id == newObject.Id);
-            if (existingObject != null)
+            if (existingObject is not null)
             {
                 existingObject.Health = newObject.Health; // Update properties as needed
                 existingObject.InitialHealth = newObject.InitialHealth; // Update properties as needed

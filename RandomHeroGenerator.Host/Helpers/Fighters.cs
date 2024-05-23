@@ -1,6 +1,6 @@
 ﻿using RandomHeroGenerator.Host.Models;
 
-namespace RandomHeroGenerator.Host.Services
+namespace RandomHeroGenerator.Host.Helpers
 {
     public static class Fighters
     {

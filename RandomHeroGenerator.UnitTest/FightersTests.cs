@@ -1,5 +1,5 @@
 ﻿using RandomHeroGenerator.Host.Models;
-using RandomHeroGenerator.Host.Services;
+using RandomHeroGenerator.Host.Helpers;
 
 namespace RandomHeroGenerator.UnitTest
 {
