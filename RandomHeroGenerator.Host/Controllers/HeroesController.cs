@@ -63,6 +63,7 @@ namespace RandomHeroGenerator.Host.Controllers
                 if (defender.Health <= 0) arena.Heroes.Remove(defender);
                 if (attacker.Health <= 0) arena.Heroes.Remove(attacker);
 
+                // Increase health of heroes by 10 who are not involved in the current round
                 foreach (var hero in arena.Heroes)
                 {
                     if (hero.Id != attacker.Id && hero.Id != defender.Id)

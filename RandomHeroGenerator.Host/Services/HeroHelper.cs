@@ -15,7 +15,7 @@ namespace RandomHeroGenerator.Host.Services
                 case "Archer":
                     attackSuccess = defender.Type switch
                     {
-                        "Horseman" => Random.NextDouble() < 0.4,
+                        "Horseman" => Random.NextDouble() < 0.4,    // 40% chance the horseman dies, 60% chance it&#39;s blocked
                         "Swordsman" => true,
                         "Archer" => true,
                         _ => throw new ArgumentOutOfRangeException()
@@ -43,16 +43,26 @@ namespace RandomHeroGenerator.Host.Services
                     throw new ArgumentOutOfRangeException();
             }
 
+            // The health of participating heroes is halved during the battle.
+            // If it becomes less than a quarter of the initial health, they die.
+            attacker.Health = attacker.Health / 2;
+            defender.Health = defender.Health / 2;
+            
+            if (defender.Health <= defender.InitialHealth / 4) defender.Health = 0;
+            if (attacker.Health <= attacker.InitialHealth / 4) attacker.Health = 0;
+
             if (attackSuccess == true)
             {
-                //defender.Health = Math.Max(defender.Health / 2, defender.InitialHealth / 4);
-                //if (defender.Health <= defender.InitialHealth / 4) defender.Health = 0;
+                // var dQuarterHealth = defender.InitialHealth / 4;
+                // defender.Health = Math.Max(defender.Health / 2, dQuarterHealth);
+                // if (defender.Health <= dQuarterHealth) defender.Health = 0;
                 defender.Health = 0;
             }
             else if (attackSuccess == false)
             {
-                //attacker.Health = Math.Max(attacker.Health / 2, attacker.InitialHealth / 4);
-                //if (attacker.Health <= attacker.InitialHealth / 4) attacker.Health = 0;
+                // var aQuarterHealth = attacker.InitialHealth / 4;
+                // attacker.Health = Math.Max(attacker.Health / 2, aQuarterHealth);
+                // if (attacker.Health <= aQuarterHealth) attacker.Health = 0;
                 attacker.Health = 0;
             }
         }
