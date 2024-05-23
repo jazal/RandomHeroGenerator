@@ -47,7 +47,7 @@ namespace RandomHeroGenerator.Host.Controllers
             while (arena.Heroes.Count > 1)
             {
                 var round = new BattleRound();
-                var (attacker, defender) = SelectRandomFighters(arena.Heroes);
+                var (attacker, defender) = Fighters.SelectRandomFighters(arena.Heroes);
                 round.Attacker = attacker.Id;
                 round.Defender = defender.Id;
 
@@ -96,18 +96,6 @@ namespace RandomHeroGenerator.Host.Controllers
                 "Swordsman" => new Hero { Id = id, Type = type, Health = 120, InitialHealth = 120 },
                 _ => throw new ArgumentOutOfRangeException()
             };
-        }
-
-        private static (Hero, Hero) SelectRandomFighters(List<Hero> heroes)
-        {
-            var attacker = heroes[Random.Next(heroes.Count)];
-            Hero defender;
-            do
-            {
-                defender = heroes[Random.Next(heroes.Count)];
-            } while (defender.Id == attacker.Id);   // Same hero cannot battle together
-
-            return (attacker, defender);
         }
     }
 }
