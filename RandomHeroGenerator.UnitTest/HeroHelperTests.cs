@@ -7,28 +7,28 @@ namespace RandomHeroGenerator.UnitTest
     public class HeroHelperTests
     {
         [TestMethod]
-        public void GetTheWinner_ArcherVsHorseman_HorsemanDies()
+        public void SimulateAttack_ArcherVsHorseman_HorsemanDies()
         {
             // Arrange
             var archer = new Hero { Id = 1, Type = "Archer", Health = 100, InitialHealth = 100 };
             var horseman = new Hero { Id = 2, Type = "Horseman", Health = 150, InitialHealth = 150 };
 
             // Act
-            HeroHelper.GetTheWinner(archer, horseman);
+            HeroHelper.SimulateAttack(archer, horseman);
 
             // Assert
             Assert.IsTrue(horseman.Health == 0 || horseman.Health == 150); // Horseman has a 40% chance to die
         }
 
         [TestMethod]
-        public void GetTheWinner_ArcherVsSwordsman_SwordsmanDies()
+        public void SimulateAttack_ArcherVsSwordsman_SwordsmanDies()
         {
             // Arrange
             var archer = new Hero { Id = 1, Type = "Archer", Health = 100, InitialHealth = 100 };
             var swordsman = new Hero { Id = 2, Type = "Swordsman", Health = 120, InitialHealth = 120 };
 
             // Act
-            HeroHelper.GetTheWinner(archer, swordsman);
+            HeroHelper.SimulateAttack(archer, swordsman);
 
             // Assert
             Assert.AreEqual(100, archer.Health); 
@@ -36,14 +36,14 @@ namespace RandomHeroGenerator.UnitTest
         }
 
         [TestMethod]
-        public void GetTheWinner_ArcherVsArcher_DefendingArcherDies()
+        public void SimulateAttack_ArcherVsArcher_DefendingArcherDies()
         {
             // Arrange
             var archerAttack = new Hero { Id = 1, Type = "Archer", Health = 100, InitialHealth = 100 };
             var archerDefend = new Hero { Id = 2, Type = "Archer", Health = 100, InitialHealth = 100 };
 
             // Act
-            HeroHelper.GetTheWinner(archerAttack, archerDefend);
+            HeroHelper.SimulateAttack(archerAttack, archerDefend);
 
             // Assert
             Assert.AreEqual(100, archerAttack.Health);
@@ -51,14 +51,14 @@ namespace RandomHeroGenerator.UnitTest
         }
 
         [TestMethod]
-        public void GetTheWinner_SwordsmanVsHorseman_NoEffect()
+        public void SimulateAttack_SwordsmanVsHorseman_NoEffect()
         {
             // Arrange
             var swordsman = new Hero { Id = 1, Type = "Swordsman", Health = 120, InitialHealth = 120 };
             var horseman = new Hero { Id = 2, Type = "Horseman", Health = 150, InitialHealth = 150 };
 
             // Act
-            HeroHelper.GetTheWinner(swordsman, horseman);
+            HeroHelper.SimulateAttack(swordsman, horseman);
 
             // Assert
             Assert.AreEqual(120, swordsman.Health); // Swordsman health unchanged
@@ -66,14 +66,14 @@ namespace RandomHeroGenerator.UnitTest
         }
 
         [TestMethod]
-        public void GetTheWinner_SwordsmanVsSwordsman_DefendingSwordsmanDies()
+        public void SimulateAttack_SwordsmanVsSwordsman_DefendingSwordsmanDies()
         {
             // Arrange
             var swordsmanA = new Hero { Id = 1, Type = "Swordsman", Health = 120, InitialHealth = 120 };
             var swordsmanD = new Hero { Id = 2, Type = "Swordsman", Health = 120, InitialHealth = 120 };
 
             // Act
-            HeroHelper.GetTheWinner(swordsmanA, swordsmanD);
+            HeroHelper.SimulateAttack(swordsmanA, swordsmanD);
 
             // Assert
             Assert.AreEqual(120, swordsmanA.Health); // Attacking Swordsman dies
@@ -81,14 +81,14 @@ namespace RandomHeroGenerator.UnitTest
         }
 
         [TestMethod]
-        public void GetTheWinner_SwordsmanVsArcher_SwordsmanDies()
+        public void SimulateAttack_SwordsmanVsArcher_SwordsmanDies()
         {
             // Arrange
             var swordsman = new Hero { Id = 1, Type = "Swordsman", Health = 120, InitialHealth = 120 };
             var archer = new Hero { Id = 2, Type = "Archer", Health = 100, InitialHealth = 100 };
 
             // Act
-            HeroHelper.GetTheWinner(swordsman, archer);
+            HeroHelper.SimulateAttack(swordsman, archer);
 
             // Assert
             Assert.AreEqual(0, swordsman.Health); // Swordsman dies
@@ -96,14 +96,14 @@ namespace RandomHeroGenerator.UnitTest
         }
 
         [TestMethod]
-        public void GetTheWinner_HorsemanVsHorseman_DefenderDies()
+        public void SimulateAttack_HorsemanVsHorseman_DefenderDies()
         {
             // Arrange
             var horsemanA = new Hero { Id = 1, Type = "Horseman", Health = 150, InitialHealth = 150 };
             var horsemanD = new Hero { Id = 2, Type = "Horseman", Health = 150, InitialHealth = 150 };
 
             // Act
-            HeroHelper.GetTheWinner(horsemanA, horsemanD);
+            HeroHelper.SimulateAttack(horsemanA, horsemanD);
 
             // Assert
             Assert.AreEqual(150, horsemanA.Health); // Attacking horseman wins
@@ -111,14 +111,14 @@ namespace RandomHeroGenerator.UnitTest
         }
 
         [TestMethod]
-        public void GetTheWinner_HorsemanVsSwordsman_HorsemanDies()
+        public void SimulateAttack_HorsemanVsSwordsman_HorsemanDies()
         {
             // Arrange
             var horseman = new Hero { Id = 1, Type = "Horseman", Health = 150, InitialHealth = 150 };
             var swordsman = new Hero { Id = 1, Type = "Swordsman", Health = 120, InitialHealth = 120 };
 
             // Act
-            HeroHelper.GetTheWinner(horseman, swordsman);
+            HeroHelper.SimulateAttack(horseman, swordsman);
 
             // Assert
             Assert.AreEqual(0, horseman.Health); // Attacking horseman dies
@@ -126,14 +126,14 @@ namespace RandomHeroGenerator.UnitTest
         }
 
         [TestMethod]
-        public void GetTheWinner_HorsemanVsArcher_ArcherDies()
+        public void SimulateAttack_HorsemanVsArcher_ArcherDies()
         {
             // Arrange
             var horseman = new Hero { Id = 1, Type = "Horseman", Health = 150, InitialHealth = 150 };
             var archer = new Hero { Id = 2, Type = "Archer", Health = 100, InitialHealth = 100 };
 
             // Act
-            HeroHelper.GetTheWinner(horseman, archer);
+            HeroHelper.SimulateAttack(horseman, archer);
 
             // Assert
             Assert.AreEqual(0, horseman.Health); // Attacking horseman dies

@@ -4,7 +4,7 @@ namespace RandomHeroGenerator.Host.Services
 {
     public static class HeroHelper
     {
-        public static void GetTheWinner(Hero attacker, Hero defender)
+        public static void SimulateAttack(Hero attacker, Hero defender)
         {
             Random Random = new();
 

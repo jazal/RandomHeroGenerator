@@ -55,7 +55,7 @@ namespace RandomHeroGenerator.Host.Controllers
                 round.DefenderType = defender.Type;
 
                 var initialHealth = (attacker.Health, defender.Health);
-                SimulateAttack(attacker, defender);
+                HeroHelper.SimulateAttack(attacker, defender);
 
                 round.AttackerHealthChange = initialHealth.Item1 - attacker.Health;
                 round.DefenderHealthChange = initialHealth.Item2 - defender.Health;
@@ -108,11 +108,6 @@ namespace RandomHeroGenerator.Host.Controllers
             } while (defender.Id == attacker.Id);   // Same hero cannot battle together
 
             return (attacker, defender);
-        }
-
-        private static void SimulateAttack(Hero attacker, Hero defender)
-        {
-            HeroHelper.GetTheWinner(attacker, defender);
         }
     }
 }
