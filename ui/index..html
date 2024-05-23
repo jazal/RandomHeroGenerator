@@ -62,7 +62,7 @@
             </tbody>
           </table>
         </div>
-        <h3 class="text-success">Winner: {{ getHeroesById(battleResults.lastHeroStanding) }}</h3>
+        <h3>Winner: <span class="text-success">{{ getHeroesById(battleResults.lastHeroStanding) }}</span></h3>
       </div>
     </div>
 
@@ -99,7 +99,7 @@
             }
           },
           getHeroesById(id) {
-            if (!id) return "N/A";
+            if (!id) return "-";
             let hero = this.battleResults.heroes.find((h) => h.id == id);
             if (hero) return ` ${hero.id} - ${hero.type}`;
           },
