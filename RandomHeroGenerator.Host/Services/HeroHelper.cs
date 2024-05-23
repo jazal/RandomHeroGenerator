@@ -34,7 +34,7 @@ namespace RandomHeroGenerator.Host.Services
                     attackSuccess = defender.Type switch
                     {
                         "Horseman" => true,
-                        "Swordsman" => true,
+                        "Swordsman" => false,
                         "Archer" => false,
                         _ => throw new ArgumentOutOfRangeException()
                     };
