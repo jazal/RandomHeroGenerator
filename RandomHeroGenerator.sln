@@ -5,6 +5,10 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomHeroGenerator.Host", "RandomHeroGenerator.Host\RandomHeroGenerator.Host.csproj", "{C5E1EA2A-5B9B-44BC-8D15-B776599363D9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ACD4A352-513E-40B6-A7E8-E54D4BA14506}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomHeroGenerator.UnitTest", "RandomHeroGenerator.UnitTest\RandomHeroGenerator.UnitTest.csproj", "{CED82936-BC98-4ACC-A1D5-43C90A15F286}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{C5E1EA2A-5B9B-44BC-8D15-B776599363D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5E1EA2A-5B9B-44BC-8D15-B776599363D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5E1EA2A-5B9B-44BC-8D15-B776599363D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CED82936-BC98-4ACC-A1D5-43C90A15F286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED82936-BC98-4ACC-A1D5-43C90A15F286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED82936-BC98-4ACC-A1D5-43C90A15F286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED82936-BC98-4ACC-A1D5-43C90A15F286}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CED82936-BC98-4ACC-A1D5-43C90A15F286} = {ACD4A352-513E-40B6-A7E8-E54D4BA14506}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7EDE0F62-C58B-4799-B77D-C48EE524D10E}
