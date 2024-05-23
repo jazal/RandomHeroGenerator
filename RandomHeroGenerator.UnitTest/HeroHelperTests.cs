@@ -69,14 +69,14 @@ namespace RandomHeroGenerator.UnitTest
         public void SimulateAttack_SwordsmanVsSwordsman_DefendingSwordsmanDies()
         {
             // Arrange
-            var swordsmanA = new Hero { Id = 1, Type = "Swordsman", Health = 109, InitialHealth = 120 };
+            var swordsmanA = new Hero { Id = 1, Type = "Swordsman", Health = 120, InitialHealth = 120 };
             var swordsmanD = new Hero { Id = 2, Type = "Swordsman", Health = 120, InitialHealth = 120 };
 
             // Act
             HeroHelper.SimulateAttack(swordsmanA, swordsmanD);
 
             // Assert
-            Assert.AreEqual(60, swordsmanA.Health);
+            Assert.IsTrue((decimal)60 == swordsmanA.Health);
             Assert.AreEqual(0, swordsmanD.Health);
         }
 

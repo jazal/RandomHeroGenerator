@@ -38,7 +38,7 @@ namespace RandomHeroGenerator.Host.Controllers
         {
             if (!Arenas.ContainsKey(arenaId))
             {
-                return NotFound("Arena not found.");
+                return NotFound("Arena not found!");
             }
 
             var arena = Arenas[arenaId];

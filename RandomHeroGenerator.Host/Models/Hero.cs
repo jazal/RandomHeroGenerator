@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Type { get; set; }
-        public int Health { get; set; }
-        public int InitialHealth { get; set; }
+        public decimal Health { get; set; }
+        public decimal InitialHealth { get; set; }
     }
 }
