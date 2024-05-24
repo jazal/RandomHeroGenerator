@@ -39,7 +39,9 @@ This project is a web API that simulates battles between heroes in an arena. The
 - **Output**: Arena identifier
 
 #### Example Request
+```
 - POST /api/heroes/generate?numberOfFighters=5
+```
 
 ### Battle
 - **Endpoint**: `/api/heroes/battle`
@@ -48,7 +50,9 @@ This project is a web API that simulates battles between heroes in an arena. The
 - **Output**: History describing the number of rounds, who attacked whom in each round, and how their health changed.
 
 #### Example Request
+```
 - POST /api/heroes/battle?arenaId={Arena identifier}
+```
 
 ### Focus on Requirements and Unit Testing
 This project is laser-focused on meeting the specific requirements outlined for the battle simulation and ensuring robust unit testing. The core functionality and battle logic are designed to adhere strictly to these rules, providing a solid foundation for future enhancements.
@@ -63,3 +67,29 @@ While the current implementation focuses on the core battle logic and unit testi
 - Enhancing performance and scalability.
 - These improvements will ensure the simulator is robust, scalable, and ready for production use.
 
+## Getting Started
+
+### Prerequisites
+
+- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
+
+### Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/random-hero-battle-simulator.git
+   cd random-hero-battle-simulator
+   ```
+2. Build the project:
+    ```
+    dotnet build
+    ````
+3. Run the tests:
+   ```
+   dotnet test
+   ```
+4. Run the project:
+   ```
+   Run the project:
+   ```
+   
