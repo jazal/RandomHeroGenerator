@@ -54,9 +54,15 @@
               <tr v-for="(round, index) in battleResults.history" :key="index">
                 <td>{{ index + 1 }}</td>
                 <td>{{ round.attackerHealthChange }}</td>
-                <td class="text-end">{{ round.attacker }} - {{ round.attackerType }}</td>
+                <td class="text-end">
+                  <span class="badge bg-success" v-if="round.isAttackerWon == true">Winner</span>
+                  {{ round.attacker }} - {{ round.attackerType }}
+                </td>
                 <td class="bg-warning">vs</td>
-                <td class="text-start">{{ round.defenderType }} - {{ round.defender }}</td>
+                <td class="text-start">
+                  {{ round.defenderType }} - {{ round.defender }}
+                  <span class="badge bg-success" v-if="round.isDefenderWon == true">Winner</span>
+                </td>
                 <td>{{ round.defenderHealthChange }}</td>
               </tr>
             </tbody>

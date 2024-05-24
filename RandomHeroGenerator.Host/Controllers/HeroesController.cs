@@ -81,8 +81,17 @@ namespace RandomHeroGenerator.Host.Controllers
                 AddOrReplaceHeroes(eliminatedHeroes, attacker);
                 AddOrReplaceHeroes(eliminatedHeroes, defender);
 
-                if (attacker.Health <= 0) arena.Heroes.Remove(attacker);
-                if (defender.Health <= 0) arena.Heroes.Remove(defender);
+                if (attacker.Health <= 0)
+                {
+                    round.IsAttackerWon = false;
+                    arena.Heroes.Remove(attacker);
+                }
+
+                if (defender.Health <= 0)
+                {
+                    round.IsDefenderWon = false;
+                    arena.Heroes.Remove(defender);
+                }
 
                 // Increase health of heroes by 10 who are not involved in the current round
                 foreach (var hero in arena.Heroes)
@@ -96,7 +105,7 @@ namespace RandomHeroGenerator.Host.Controllers
                 history.Add(round);
             }
 
-            if(arena.Heroes.Count == 1) AddOrReplaceHeroes(eliminatedHeroes, arena.Heroes[0]);
+            if (arena.Heroes.Count == 1) AddOrReplaceHeroes(eliminatedHeroes, arena.Heroes[0]);
 
             arena.History = history; // Update arena history
             Arenas[arenaId] = arena; // Save the updated arena back to the dictionary
