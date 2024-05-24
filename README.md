@@ -12,12 +12,12 @@ This project is a web API that simulates battles between heroes in an arena. The
 ### Swordsman Attacks:
 - **Horseman**: No effect.
 - **Swordsman**: Defending swordsman dies.
-- **Archer**: Attacking archer dies.
+- **Archer**: Attacking swordsman dies.
 
 ### Horseman Attacks:
 - **Horseman**: Defending horseman dies.
 - **Swordsman**: Horseman dies.
-- **Archer**: Attacking archer dies.
+- **Archer**: Attacking horseman dies.
 
 ## Battle Rules
 
