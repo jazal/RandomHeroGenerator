@@ -16,6 +16,22 @@ namespace RandomHeroGenerator.UnitTest
         }
 
         [TestMethod]
+        public void GenerateHeroes_ReturnsBadRequest_WhenNumberOfFightersIsLessThanOrEqualToZero()
+        {
+            // Arrange
+            int invalidNumberOfFighters = 0;
+
+            // Act
+            var result = _controller.GenerateHeroes(invalidNumberOfFighters);
+
+            // Assert
+            Assert.IsInstanceOfType(result.Result, typeof(BadRequestObjectResult));
+            var badRequestResult = result.Result as BadRequestObjectResult;
+            Assert.IsNotNull(badRequestResult);
+            Assert.AreEqual("Invalid input: Enter more than 1", badRequestResult.Value);
+        }
+
+        [TestMethod]
         public void GenerateHeroes_ReturnsArenaId()
         {
             // Arrange

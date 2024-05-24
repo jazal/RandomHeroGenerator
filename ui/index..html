@@ -63,6 +63,28 @@
           </table>
         </div>
         <h3>Winner: <span class="text-success">{{ getHeroesById(battleResults.lastHeroStanding) }}</span></h3>
+
+        <div class="mt-4">
+          <h3>All Fighters</h3>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center table-hover text-nowrap">
+              <thead>
+                <tr>
+                  <th>Heroes</th>
+                  <th>Initial Health</th>
+                  <th>Current Health</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="player in battleResults.heroes" :key="player.id">
+                  <td>{{ player.id }} - {{ player.type }}</td>
+                  <td>{{ player.initialHealth }}</td>
+                  <td>{{ player.health }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -80,6 +102,7 @@
         methods: {
           async generateHeroes() {
             try {
+              if(this.numberOfFighters <= 0) return alert("Invalid input: define more than 1");
               const response = await axios.post(
                 `${this.baseAPI}/api/heroes/generate?numberOfFighters=${this.numberOfFighters}`
               );

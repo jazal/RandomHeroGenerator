@@ -14,9 +14,17 @@ namespace RandomHeroGenerator.Host.Controllers
         private static readonly Random Random = new();
         private static List<ArenaResult> ArenaResults = new();
 
+        /// <summary>
+        /// return: ArenaId 
+        /// This can be used on the battle
+        /// </summary>
+        /// <param name="numberOfFighters">Number of the fighters (int)</param>
+        /// <returns></returns>
         [HttpPost("generate")]
         public ActionResult<int> GenerateHeroes([FromQuery] int numberOfFighters)
         {
+            if (numberOfFighters <= 0) return BadRequest("Invalid input: Enter more than 1");
+
             var arenaId = ++_arenaCounter;
             var heroes = new List<Hero>();
 
@@ -34,6 +42,11 @@ namespace RandomHeroGenerator.Host.Controllers
             return Ok(arenaId);
         }
 
+        /// <summary>
+        /// Result: Get the History of the battles of that particular arena
+        /// </summary>
+        /// <param name="arenaId">This value can be get by using the 'generate' api</param>
+        /// <returns></returns>
         [HttpPost("battle")]
         public ActionResult<ArenaResult> Battle([FromQuery] int arenaId)
         {
