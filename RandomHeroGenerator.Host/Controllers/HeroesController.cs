@@ -14,9 +14,17 @@ namespace RandomHeroGenerator.Host.Controllers
         private static readonly Random Random = new();
         private static List<ArenaResult> ArenaResults = new();
 
+        /// <summary>
+        /// return: ArenaId 
+        /// This can be used on the battle
+        /// </summary>
+        /// <param name="numberOfFighters">Number of the fighters (int)</param>
+        /// <returns></returns>
         [HttpPost("generate")]
         public ActionResult<int> GenerateHeroes([FromQuery] int numberOfFighters)
         {
+            if (numberOfFighters <= 0) return BadRequest("Invalid input: Enter more than 1");
+
             var arenaId = ++_arenaCounter;
             var heroes = new List<Hero>();
 
@@ -34,6 +42,11 @@ namespace RandomHeroGenerator.Host.Controllers
             return Ok(arenaId);
         }
 
+        /// <summary>
+        /// Result: Get the History of the battles of that particular arena
+        /// </summary>
+        /// <param name="arenaId">This value can be get by using the 'generate' api</param>
+        /// <returns></returns>
         [HttpPost("battle")]
         public ActionResult<ArenaResult> Battle([FromQuery] int arenaId)
         {
@@ -68,8 +81,17 @@ namespace RandomHeroGenerator.Host.Controllers
                 AddOrReplaceHeroes(eliminatedHeroes, attacker);
                 AddOrReplaceHeroes(eliminatedHeroes, defender);
 
-                if (attacker.Health <= 0) arena.Heroes.Remove(attacker);
-                if (defender.Health <= 0) arena.Heroes.Remove(defender);
+                if (attacker.Health <= 0)
+                {
+                    round.IsAttackerWon = false;
+                    arena.Heroes.Remove(attacker);
+                }
+
+                if (defender.Health <= 0)
+                {
+                    round.IsDefenderWon = false;
+                    arena.Heroes.Remove(defender);
+                }
 
                 // Increase health of heroes by 10 who are not involved in the current round
                 foreach (var hero in arena.Heroes)
@@ -83,7 +105,7 @@ namespace RandomHeroGenerator.Host.Controllers
                 history.Add(round);
             }
 
-            if(arena.Heroes.Count == 1) AddOrReplaceHeroes(eliminatedHeroes, arena.Heroes[0]);
+            if (arena.Heroes.Count == 1) AddOrReplaceHeroes(eliminatedHeroes, arena.Heroes[0]);
 
             arena.History = history; // Update arena history
             Arenas[arenaId] = arena; // Save the updated arena back to the dictionary
